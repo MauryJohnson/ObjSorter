@@ -144,17 +144,35 @@ public class ObjSort {
 		//writer.println("The second line");
 		//writer.close();
 		
+		int VIdx = 0;
+		int NVIdx = 0;
+		int FIdx = 0;
+		
 		// TODO Auto-generated method stub
-			for(int i=0; i<content.length();i+=1) {
-				if(content.charAt(i)=='v')
-					break;
-				else
-					writer.print(content.charAt(i));
+			String[] O = content.split("\n");
+			for(int i=0; i<O.length;i+=1) {
+				if(O[i].charAt(0)=='v' && O[i].charAt(1)=='n') {
+					writer.print(NVertices.get(NVIdx));
+					NVIdx+=1;
+				}
+				else if(O[i].charAt(0)=='v' ) {
+					writer.print(Vertices.get(VIdx));
+					VIdx+=1;
+				}
+				else if(O[i].charAt(0)=='f') {
+					writer.print(Faces.get(FIdx));
+					FIdx+=1;
+				}
+				else {
+					String s = "";
+					for(int k=0; k<O[i].length();k+=1) {
+						s+=O[i].charAt(k);
+					}
+					writer.println(s);
+				}
 			}
 			
-			for(int i=0; i<Vertices.size();i+=1) {
-				writer.print(Vertices.get(i));
-			}
+		/*
 			
 			for(int i=0; i<NVertices.size();i+=1) {
 				writer.print(NVertices.get(i));
@@ -163,7 +181,7 @@ public class ObjSort {
 			for(int i=0; i<Faces.size();i+=1) {
 				writer.print(Faces.get(i));
 			}
-			
+			*/
 			writer.close();
 	}
 
