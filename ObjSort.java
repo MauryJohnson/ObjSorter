@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Main Function of parsing
@@ -19,7 +20,9 @@ public class ObjSort {
 		ArrayList<Face> Faces = new ArrayList<Face>();
 		
 		try {
-			content = new Scanner(new File("src/LArm.obj")).useDelimiter("\\Z").next();
+			///////////////////////////////FILE////////////////////////////////////////
+			content = new Scanner(new File("src/RLeg.obj")).useDelimiter("\\Z").next();
+			///////////////////////////////////////////////////////////////////////////
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +135,9 @@ public class ObjSort {
 		
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("src/LArmS.obj", "UTF-8");
+			///////////////////////////////FILE////////////////////////////////////////
+			writer = new PrintWriter("src/RLegS.obj", "UTF-8");
+			///////////////////////////////////////////////////////////////////////////
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,7 +153,11 @@ public class ObjSort {
 		int NVIdx = 0;
 		int FIdx = 0;
 		
+		
+		//Traditional Storing OBJ File
+		
 		// TODO Auto-generated method stub
+			
 			String[] O = content.split("\n");
 			for(int i=0; i<O.length;i+=1) {
 				if(O[i].charAt(0)=='v' && O[i].charAt(1)=='n') {
@@ -172,16 +181,30 @@ public class ObjSort {
 				}
 			}
 			
-		/*
 			
-			for(int i=0; i<NVertices.size();i+=1) {
-				writer.print(NVertices.get(i));
-			}
-			
+			/////////////////////////////// GROUPING  BY//////////////////////////////////////
+			/*
+			//Store all Vertices grouping by each face!!!
 			for(int i=0; i<Faces.size();i+=1) {
-				writer.print(Faces.get(i));
+				writer.println("//FACE//");
+				for(int j=0; j<Faces.get(i).VerticesIndexes.size();j+=1) {
+					writer.print(Vertices.get(Faces.get(i).VerticesIndexes.get(j)-1));
+				}
+				writer.print("//FACE//");
 			}
 			*/
+			/*
+			//Store all Normals grouping by each face
+			for(int i=0; i<Faces.size();i+=1) {
+				for(int j=0; j<Faces.get(i).NVerticesIndexes.size();j+=1)
+					writer.print(NVertices.get(Faces.get(i).NVerticesIndexes.get(j)-1));
+			}
+			
+			//Store all faces
+			for(int i=0; i<Faces.size();i+=1)
+				writer.print(Faces.get(i));
+			*/
+			
 			writer.close();
 	}
 

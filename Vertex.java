@@ -20,14 +20,17 @@ public class Vertex {
 	}
 	
 	public String toString() {
-		String s = "v ";
+		//String s = "v";
+		String s = "";
 		for(int i=0; i<Data.size();i+=1) {
 			s+=Data.get(i);
 			if(i!=Data.size()-1) {
-				s+=" ";
+				//s+=" ";
+				s+=",";
 			}
 			else {
-				s+="\n";
+				//s+="\n";
+				s+=",\n";
 			}
 		}
 		return s;
